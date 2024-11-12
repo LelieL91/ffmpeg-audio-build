@@ -2,7 +2,10 @@ name: Build static ffmpeg
 
 on:
   push:
-  pull_request:
+    branches-ignore:
+      - main
+    tags-ignore:
+      - main
 
 jobs:
   package-linux:
@@ -19,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update -y && \
-          sudo apt-get install -y yasm
+          sudo apt-get install -y yasm libsdl2-dev
       - name: Install ARM64 compiler
         if: env.ARCH == 'arm64'
         run: |
