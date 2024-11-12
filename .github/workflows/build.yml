@@ -42,7 +42,7 @@ jobs:
     env:
       ARCH: ${{ matrix.arch }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4.2.2
       - name: Install dependencies
         run: |
           sudo apt-get update -y && \
@@ -66,7 +66,7 @@ jobs:
     env:
       TARGET: ${{ matrix.target }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4.2.2
       - name: Install dependencies
         run: brew install yasm
       - name: Build MacOS Artifacts
