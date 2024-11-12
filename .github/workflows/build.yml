@@ -22,7 +22,8 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update -y && \
-          sudo apt-get install -y yasm libsdl2-dev
+          sudo apt-get upgrade -y && \
+          sudo apt-get install -y yasm
       - name: Install ARM64 compiler
         if: env.ARCH == 'arm64'
         run: |
@@ -37,7 +38,7 @@ jobs:
           path: artifacts/
 
   package-windows:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         arch:
