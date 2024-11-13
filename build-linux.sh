@@ -100,4 +100,4 @@ make install
 
 chown $(stat -c '%u:%g' "$BASE_DIR") -R "$BASE_DIR/$OUTPUT_DIR"
 
-cp 'ffbuild/config.log' 'artifacts/ffbuild-linux-config.log'
+cp "$BUILD_DIR/ffbuild/config.log" 'artifacts/ffbuild-linux-config.log'
