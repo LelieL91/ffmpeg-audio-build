@@ -19,13 +19,17 @@ trap 'rm -rf $BUILD_DIR' EXIT
 
 case $ARCH in
     x86_64)
-        SDL2_CROSS_PREFIX=''
         ;;
     i686)
         FFMPEG_CONFIGURE_FLAGS+=(--cc='gcc -m32')
         ;;
     arm64)
-        SDL2_CROSS_PREFIX='aarch64-linux-gnu-'
+        SDL2_CONFIGURE_FLAGS+=(
+            --enable-cross-compile
+            --cross-prefix='aarch64-linux-gnu-'
+            --target-os='linux'
+            --arch='aarch64'
+        )
         FFMPEG_CONFIGURE_FLAGS+=(
             --enable-cross-compile
             --cross-prefix='aarch64-linux-gnu-'
@@ -34,7 +38,9 @@ case $ARCH in
         )
         ;;
     arm*)
-        SDL2_CROSS_PREFIX='arm-linux-gnueabihf-'
+        SDL2_CONFIGURE_FLAGS+=(
+            --cross-prefix=arm-linux-gnueabihf-
+        )
         FFMPEG_CONFIGURE_FLAGS+=(
             --enable-cross-compile
             --cross-prefix='arm-linux-gnueabihf-'
@@ -77,7 +83,8 @@ tar -xzf "$BASE_DIR/SDL2-$SDL2_VERSION.tar.gz"
 
 cd "SDL2-$SDL2_VERSION"
 mkdir -p "$BUILD_DIR/sdl2"
-./configure --prefix="$BUILD_DIR/sdl2" --disable-shared --enable-static --host=$SDL2_CROSS_PREFIX
+SDL2_CONFIGURE_FLAGS+=(--prefix="$BUILD_DIR/sdl2")
+./configure "${SDL2_CONFIGURE_FLAGS[@]}"
 make -j$(nproc)
 make install
 

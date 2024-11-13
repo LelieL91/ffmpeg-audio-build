@@ -4,6 +4,11 @@ SDL2_VERSION='2.30.9'
 SDL2_LIN_URL="https://github.com/libsdl-org/SDL/releases/download/release-$SDL2_VERSION/SDL2-$SDL2_VERSION.tar.gz"
 SDL2_WIN_URL="https://github.com/libsdl-org/SDL/releases/download/release-$SDL2_VERSION/SDL2-devel-$SDL2_VERSION-mingw.tar.gz"
 
+SDL2_CONFIGURE_FLAGS=(
+    --enable-shared=no
+    --enable-system-iconv=no 
+)
+
 FFMPEG_VERSION='7.1'
 FFMPEG_TARBALL="ffmpeg-$FFMPEG_VERSION.tar.gz"
 FFMPEG_TARBALL_URL="https://ffmpeg.org/releases/$FFMPEG_TARBALL"
