@@ -8,7 +8,7 @@ BASE_DIR=$(pwd)
 source common.sh
 
 [ -e "$FFMPEG_TARBALL" ] || curl -s -L -O "$FFMPEG_TARBALL_URL"
-[ -e "SDL2-$SDL2_VERSION.tar.gz" ] || curl -s -L -O "$SDL2_LINUX_URL"
+[ -e "SDL2-$SDL2_VERSION.tar.gz" ] || curl -s -L -O "$SDL2_LIN_URL"
 
 : ${ARCH?}
 
