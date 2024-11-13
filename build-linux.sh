@@ -19,16 +19,27 @@ trap 'rm -rf $BUILD_DIR' EXIT
 
 case $ARCH in
     x86_64)
+        SDL2_CONFIGURE_FLAGS+=(
+          --host=
+        )
         ;;
     i686)
         FFMPEG_CONFIGURE_FLAGS+=(--cc='gcc -m32')
         ;;
     arm64)
+        SDL2_CONFIGURE_FLAGS+=(
+            --build=x86_64-pc-linux-gnu
+            --host=aarch64-linux-gnu
+            --enable-cross-compile
+            --cross-prefix=aarch64-linux-gnu-
+            --target-os=linux
+            --arch=aarch64
+        )
         FFMPEG_CONFIGURE_FLAGS+=(
             --enable-cross-compile
-            --cross-prefix='aarch64-linux-gnu-'
-            --target-os='linux'
-            --arch='aarch64'
+            --cross-prefix=aarch64-linux-gnu-
+            --target-os=linux
+            --arch=aarch64
         )
         ;;
     arm*)
@@ -37,30 +48,30 @@ case $ARCH in
         )
         FFMPEG_CONFIGURE_FLAGS+=(
             --enable-cross-compile
-            --cross-prefix='arm-linux-gnueabihf-'
-            --target-os='linux'
-            --arch='arm'
+            --cross-prefix=arm-linux-gnueabihf-
+            --target-os=linux
+            --arch=arm
         )
         case $ARCH in
             armv7-a)
                 FFMPEG_CONFIGURE_FLAGS+=(
-                    --cpu='armv7-a'
+                    --cpu=armv7-a
                 )
                 ;;
             armv8-a)
                 FFMPEG_CONFIGURE_FLAGS+=(
-                    --cpu='armv8-a'
+                    --cpu=armv8-a
                 )
                 ;;
             armhf-rpi2)
                 FFMPEG_CONFIGURE_FLAGS+=(
-                    --cpu='cortex-a7'
+                    --cpu=cortex-a7
                     --extra-cflags='-fPIC -mcpu=cortex-a7 -mfloat-abi=hard -mfpu=neon-vfpv4 -mvectorize-with-neon-quad'
                 )
                 ;;
             armhf-rpi3)
                 FFMPEG_CONFIGURE_FLAGS+=(
-                    --cpu='cortex-a53'
+                    --cpu=cortex-a53
                     --extra-cflags='-fPIC -mcpu=cortex-a53 -mfloat-abi=hard -mfpu=neon-fp-armv8 -mvectorize-with-neon-quad'
                 )
                 ;;
