@@ -95,9 +95,9 @@ FFMPEG_CONFIGURE_FLAGS+=(--extra-ldflags="-L$BUILD_DIR/sdl2/lib -lSDL2")
 
 ./configure "${FFMPEG_CONFIGURE_FLAGS[@]}" || (cat 'ffbuild/config.log' && exit 1)
 
+cp "ffbuild/config.log" "$BASE_DIR/ffbuild-linux-config.log"
+
 make -j$(nproc)
 make install
 
 chown $(stat -c '%u:%g' "$BASE_DIR") -R "$BASE_DIR/$OUTPUT_DIR"
-
-cp "$BUILD_DIR/ffbuild/config.log" 'artifacts/ffbuild-linux-config.log'

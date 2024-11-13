@@ -35,6 +35,12 @@ jobs:
         with:
           name: ffmpeg-linux-${{ env.ARCH }}
           path: artifacts/
+      - name: Upload config.log as artifact
+        uses: actions/upload-artifact@v4.4.3
+        with:
+          name: config-log-${{ env.ARCH }}
+          path: ffbuild-linux-config.log
+
 
   package-windows:
     runs-on: ubuntu-latest
