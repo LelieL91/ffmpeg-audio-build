@@ -25,11 +25,13 @@ case $ARCH in
         ;;
     arm64)
         SDL2_CONFIGURE_FLAGS+=(
+            --build='x86_64-pc-linux-gnu'
+            --host='aarch64-linux-gnu'
             --enable-cross-compile
             --cross-prefix='aarch64-linux-gnu-'
             --target-os='linux'
             --arch='aarch64'
-            --host='aarch64-linux-gnu'
+
         )
         FFMPEG_CONFIGURE_FLAGS+=(
             --enable-cross-compile
