@@ -29,6 +29,7 @@ case $ARCH in
             --cross-prefix='aarch64-linux-gnu-'
             --target-os='linux'
             --arch='aarch64'
+            --host='aarch64-linux-gnu'
         )
         FFMPEG_CONFIGURE_FLAGS+=(
             --enable-cross-compile
